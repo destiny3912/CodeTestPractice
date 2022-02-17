@@ -7,24 +7,28 @@ public class Main {
 	public static void main(String[] args) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		String Line = br.readLine();
 		StringTokenizer slice = new StringTokenizer(Line, " ");
-		double A, B, V;
+		int A, B, V;
 		
-		A = Double.parseDouble(slice.nextToken());
-		B = Double.parseDouble(slice.nextToken());
-		V = Double.parseDouble(slice.nextToken());
+		A = Integer.parseInt(slice.nextToken());
+		B = Integer.parseInt(slice.nextToken());
+		V = Integer.parseInt(slice.nextToken());
 		
 		int day = 0;
 		
-		day = (int)(Math.ceil((V - A) / (A -B)) + 1);
+		if(V == A) day = 1;
+		else if((A - B) == 1)
+		{
+			day = V - A + 1;
+		}
+		else
+		{
+			if((V-A)%(A - B) == 0) day = (V-A)/(A-B) + 1;
+			else day = (V-A)/(A-B) + 2;
+		}
 		
-		bw.write(day + " ");
-		
-		br.close();
-		bw.flush();
-		bw.close();
+		System.out.println(day);
 	}
 }
