@@ -37,5 +37,7 @@ class Solution
 			
 			System.out.println("#" + test_case + " " + basicNumberCount);
 		}
+
+		sc.close();
 	}
 }

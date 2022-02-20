@@ -62,5 +62,7 @@ class Solution
 				System.out.println("#" + test_case+ " NO");
 			}
 		}
+
+		sc.close();
 	}
 }

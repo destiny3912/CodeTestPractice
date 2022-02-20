@@ -18,5 +18,6 @@ class Solution {
 			
 			System.out.println("#" + test_case + " " + (A + B) % 24);
 		}
+		sc.close();
 	}
 }
