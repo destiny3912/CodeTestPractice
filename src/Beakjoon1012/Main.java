@@ -82,6 +82,7 @@ public class Main {
                                     {
                                         firstCell.setCell(outerIndex + dx[index], innerIndex + dy[index]);
                                         stack.push(firstCell);
+                                        visitedList[outerIndex + dx[index]][innerIndex + dy[index]] = true;
                                     }
                                 }
                             }
