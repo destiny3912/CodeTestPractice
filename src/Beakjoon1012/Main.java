@@ -3,9 +3,29 @@ package Beakjoon1012;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Main {
+    public static class cell{
+        private int row;
+        private int col;
 
+        public void setCell(int R, int C)
+        {
+            row = R;
+            col = C;
+        }
+
+        public int getRow()
+        {
+            return row;
+        }
+
+        public int getCol()
+        {
+            return col;
+        }
+    }
     public static void main(String args[]) throws Exception
     {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
@@ -18,10 +38,63 @@ public class Main {
             int M = Integer.parseInt(rcv[0]);
             int N = Integer.parseInt(rcv[1]);
             int K = Integer.parseInt(rcv[2]);
+            int areaNumber = 0;
+            boolean[][] map = new boolean[M][N];
+            boolean[][] visitedList = new boolean[M][N];
+    
+                for(int index = 0; index < M; index++) 
+                    Arrays.fill(map[index], false);
+    
+                for(int innerIndex = 0; innerIndex < M; innerIndex++) 
+                    Arrays.fill(visitedList[innerIndex], false);
+    
+                for(int index = 0; index < K; index++)
+                {
+                    String[] rcv2 = stdin.readLine().split(" ");
+                    int n1 = Integer.parseInt(rcv2[0]), n2 =Integer.parseInt(rcv2[1]);
+    
+                    map[n1][n2] = true;
+                }
+
+            int[] dx = {1, 0, -1, -0};
+            int[] dy = {0, 1, 0, -1};
+            Stack<cell> stack = new Stack<cell>();
+            cell firstCell = new cell();
+            firstCell.setCell(0, 0);
+            stack.push(firstCell);
             
+            while(!stack.isEmpty())
+            {
+                cell currentCell = stack.pop();
+                for(int outerIndex = 0; outerIndex < M; outerIndex++)
+                {
+                    for(int innerIndex = 0; innerIndex < N; innerIndex++)
+                    {
+                        if(map[outerIndex][innerIndex] && !visitedList[outerIndex][innerIndex])
+                        {
+                            areaNumber++;
+                            for(int index = 0; index < 4; index++)
+                            {
+                                visitedList[currentCell.getRow()][currentCell.getCol()] = true;
+                                if(outerIndex + dx[index] >= 0 && outerIndex + dx[index] < M && innerIndex + dy[index] >= 0 && innerIndex + dy[index] < N)
+                                {
+                                    if(map[outerIndex + dx[index]][innerIndex + dy[index]] && !visitedList[outerIndex + dx[index]][innerIndex + dy[index]])
+                                    {
+                                        firstCell.setCell(outerIndex + dx[index], innerIndex + dy[index]);
+                                        stack.push(firstCell);
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            
+            System.out.println(areaNumber);
             //bruteForce(M, N, K, stdin);
 
-            
+
             T--;
         }
     }
@@ -29,8 +102,8 @@ public class Main {
     private static void bruteForce(int M, int N, int K, BufferedReader stdin) throws Exception
     {
         int areaNumber = 0;
-            boolean[][] map = new boolean[M][N];
-            boolean[][] visitedList = new boolean[M][N];
+        boolean[][] map = new boolean[M][N];
+        boolean[][] visitedList = new boolean[M][N];
 
             for(int index = 0; index < M; index++) 
                 Arrays.fill(map[index], false);
