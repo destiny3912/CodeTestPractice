@@ -18,7 +18,17 @@ public class Main {
             int M = Integer.parseInt(rcv[0]);
             int N = Integer.parseInt(rcv[1]);
             int K = Integer.parseInt(rcv[2]);
-            int areaNumber = 0;
+            
+            //bruteForce(M, N, K, stdin);
+
+            
+            T--;
+        }
+    }
+
+    private static void bruteForce(int M, int N, int K, BufferedReader stdin) throws Exception
+    {
+        int areaNumber = 0;
             boolean[][] map = new boolean[M][N];
             boolean[][] visitedList = new boolean[M][N];
 
@@ -48,10 +58,7 @@ public class Main {
                 }
             }
             System.out.println(areaNumber);
-            T--;
-        }
     }
-
     private static void getBugNumber(boolean[][] map, boolean[][] visitedList, int row, int col, int maxRow, int maxCol)
     {
         int[] dx = {1, 0, -1, -0};
@@ -69,4 +76,6 @@ public class Main {
             }
         }
     }
+
+
 }
